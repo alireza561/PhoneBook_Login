@@ -1,7 +1,7 @@
 from tkinter import *
 import sqlite3
 
-from frontend.login import Login
+from frontend.login import LoginFront
 from frontend.forgot_page import Forgot
 from frontend.restart_password_page import RestartPasswordPage
 from frontend.signup_page import SignUp
@@ -12,11 +12,11 @@ from backend.signup import SignUpCommand
 from backend.insert import Insert
 from backend.update import Update
 
-class LoginPage(Login, Forgot, RestartPasswordPage, SignUp, BindsMethod, LoginCommand,
+class LoginPage(LoginFront, Forgot, RestartPasswordPage, SignUp, BindsMethod, LoginCommand,
  SignUpCommand, Insert, Update):
 
     def __init__(self):
-        Login.__init__(self)
+        LoginFront.__init__(self)
         self.match_pass = StringVar()
         self.forgot_label_username_stringvar = StringVar()
         self.sing_up_eror = StringVar()

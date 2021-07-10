@@ -1,2 +1,7 @@
 My_PhoneBook.db
 Login.db
+__pycache__/
+backend/__pycache__/
+backend_func/__pycache__/
+frontend/__pycache__/
+frontend_func/__pycache__/

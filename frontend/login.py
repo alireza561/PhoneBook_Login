@@ -1,6 +1,7 @@
 from tkinter import *
+import random
 
-class Login:
+class LoginFront:
     """ This class is for creating a login window """
     def __init__(self) :
         self.root = Tk()
@@ -10,6 +11,15 @@ class Login:
         self.login_stringvar = StringVar()
         self.login_usename_stringvar = StringVar()
         self.login_password_stringvar = StringVar()
+        self.captcha_stringvar = StringVar()
+        list_char = []
+        captcha = ''
+        for num in range(1, 6):
+            x = random.randint(97 , 122)
+            list_char.append(chr(x))
+        for char in list_char:
+            captcha += char
+        self.captcha_stringvar.set(captcha)
 
 
         # =============================Photo background===============================
@@ -22,24 +32,28 @@ class Login:
 
         #=====================================images================================
 
-        self.logImage = PhotoImage(file='./image/wo_man4.png')
+        self.logImage = PhotoImage(file='./image/wo_man.png')
         self.logImage2 = PhotoImage(file='./image/personriz_2.png')
         self.passimage = PhotoImage(file='./image/ghofleriz_2.png')
+        self.recaptchaimage = PhotoImage(file='./image/recaptcha.png')
 
         # ===================  Labels for left and right   -->  label_User    logimage    label_Login  ==========================
         self.lb_user = Label(self.main_frame, text='User', font=('comic sans ms', 20, 'bold'), bg='#d5ecf5', fg='#000066')
-        self.lb_user.place(x=20, y=30)
+        self.lb_user.place(x=20, y=10)
         self.lb_login = Label(self.main_frame, text='Login', font=('comic sans ms', 20, 'bold'), bg='#d5ecf5', fg='#000066')
-        self.lb_login.place(x=220, y=30)
+        self.lb_login.place(x=220, y=10)
         # ==== logimage ====
         self.lb_logimage = Label(self.main_frame, image=self.logImage, bg='#d5ecf5') 
-        self.lb_logimage.place(x=92, y=0)
+        self.lb_logimage.place(x=130, y=10)
         # =============  label for entry(username  and  password) ==================================
         self.lb_username = Label(self.main_frame, text='username', font=('comic sans ms', 10), fg='#0000b3', bg='#d5ecf5')
-        self.lb_username.place(x=0, y=120)
+        self.lb_username.place(x=0, y=55)
 
         self.lb_pass = Label(self.main_frame, text='password', font=('comic sans ms', 10), fg='#0000b3', bg='#d5ecf5')
-        self.lb_pass.place(x=0, y=169)
+        self.lb_pass.place(x=0, y=104)
+
+        self.lb_recaptcha = Label(self.main_frame, text='recaptcha', font=('comic sans ms', 10), fg='#0000b3', bg='#d5ecf5')
+        self.lb_recaptcha.place(x=0, y=153)
         # ========================= label for question  ===================================
         self.lb_signup = Label(
             self.main_frame, text='Dont have an account?', font=('comic sans ms', 10), bg='#d5ecf5', fg='#0000cc')
@@ -48,31 +62,39 @@ class Login:
         # =================== label for Entrie's images(icon) ====================================
 
         self.lb_logimage2 = Label(self.main_frame, image=self.logImage2, bg='#ffffff', height=21)
-        self.lb_logimage2.place(x=5, y=141)
+        self.lb_logimage2.place(x=5, y=76)
         self.lb_passimage = Label(self.main_frame, image=self.passimage, bg='#ffffff')
-        self.lb_passimage.place(x=5, y=192)
+        self.lb_passimage.place(x=5, y=127)
+        self.lb_recaptchaimage = Label(self.main_frame, image=self.recaptchaimage, bg='#ffffff')
+        self.lb_recaptchaimage.place(x=5, y=200)
 
         #================================= Entries===============================
 
         self.name_entry = Entry(self.main_frame, font=('comic sans ms', 12), width=25, textvariable=self.login_usename_stringvar)
-        self.name_entry.place(x=30, y=140)
+        self.name_entry.place(x=30, y=75)
         self.pass_entry = Entry(self.main_frame, font=('comic sans ms', 12), width=25, show='*', textvariable=self.login_password_stringvar)
-        self.pass_entry.place(x=30, y=190)
+        self.pass_entry.place(x=30, y=125)
+        self.captcha_entry = Entry(self.main_frame, font=('comic sans ms', 12), width=25)
+        self.captcha_entry.place(x=30, y=198)
 
-        # ============= label for label_login_stringvar =================================
+        # ============= label for login_stringvar and captcha_stringvar=================================
         self.label_stringvar = Label(self.main_frame, textvariable=self.login_stringvar, bg='#d5ecf5', fg='red', width=27,
                                            font=('comic sans ms', 11))
-        self.label_stringvar.place(x=32, y=225)
+        self.label_stringvar.place(x=32, y=235)
+
+        self.labelCaptcha_stringvar = Label(self.main_frame, textvariable=self.captcha_stringvar, bg='#d5ecf5', fg='red', width=27,
+                                           font=('comic sans ms', 11))
+        self.labelCaptcha_stringvar.place(x=70, y=153)
         #================================ Buttons===================================
         self.btn_log = Button(
             self.main_frame, text='LOGIN', font=('comic sans ms', 11), background='#0488c9', foreground='#ffffff',
             activebackground='#ffffff', activeforeground='#0488c9', command=self.login_command)
-        self.btn_log.place(x=30, y=260, width=250)
+        self.btn_log.place(x=30, y=268, width=245)
 
         self.btn_forgotpass = Button(
             self.main_frame, text='forgot your password?', background='#d5ecf5', foreground='#ccccff', relief=FLAT,
             activebackground='#d5ecf5', activeforeground='#733603', command=self.forgot_username_page)
-        self.btn_forgotpass.place(x=155, y=300)
+        self.btn_forgotpass.place(x=146, y=303)
 
         self.btn_signup = Button(
             self.main_frame, text='Sign up!', background='#d5ecf5', foreground='#660066', relief=FLAT,
